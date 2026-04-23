@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: user-service
+            uri: http://localhost:1111
+            predicates:
+              - Path=/api/users/**
+
+          - id: auth-service
+            uri: http://localhost:1111
+            predicates:
+              - Path=/api/auth/**
+
+          - id: product-service
+            uri: http://localhost:2222
+            predicates:
+              - Path=/api/products/**
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+server:
+  port: 9999

@@ -66,10 +66,9 @@ public class UserViewController {
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}/products")
-    public String getUserWithProducts(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.getById(id));
-        model.addAttribute("products", userService.getUserWithProducts(id));
-        return "users/products";
+    @GetMapping("/{id}/orders")
+    public String getUserWithOrders(@PathVariable Long id, Model model) {
+        model.addAttribute("result", userService.getUserWithOrders(id));
+        return "users/user-orders";
     }
 }

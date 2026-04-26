@@ -49,7 +49,7 @@ public class AuthService {
             throw new IllegalArgumentException("Wrong password");
         }
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
         LoginResponse response = new LoginResponse();
         response.setToken(token);
         response.setUsername(user.getUsername());

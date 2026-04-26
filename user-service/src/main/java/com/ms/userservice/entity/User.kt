@@ -20,6 +20,9 @@ open class User @JvmOverloads constructor(
     @Column(name = "password", nullable = false, length = 255)
     open var password: String? = null,
 
+    @Column(name = "role", nullable = false, length = 20)
+    open var role: String? = "ROLE_USER",
+
     @Column(name = "created_at", nullable = false, updatable = false)
     open var createdAt: LocalDateTime? = LocalDateTime.now()
 )

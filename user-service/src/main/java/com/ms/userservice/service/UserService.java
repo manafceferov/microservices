@@ -78,6 +78,14 @@ public class UserService {
         return result;
     }
 
+    public void changeUserRole(Long id, String role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        user.setRole(role); // və ya enum istifadə edirsənsə convert et
+        userRepository.save(user);
+    }
+
 //    public Object getUserWithProducts(Long userId) {
 //        UserResponse user = getById(userId);
 //        Object products = productClient.getAllProducts().getData();

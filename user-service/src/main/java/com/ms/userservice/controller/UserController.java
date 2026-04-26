@@ -40,6 +40,15 @@ public class UserController {
         return new ApiResponse<>(true, userService.update(request), Messages.UPDATED.name());
     }
 
+    @PutMapping("/{id}/role")
+    public ApiResponse<Void> changeUserRole(
+            @PathVariable Long id,
+            @RequestParam String role
+    ) {
+        userService.changeUserRole(id, role);
+        return new ApiResponse<>(true, Messages.UPDATED.name());
+    }
+
     @DeleteMapping("/{id}")
     public ApiResponse<Void> delete(@PathVariable Long id) {
         userService.delete(id);

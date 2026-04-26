@@ -1,6 +1,6 @@
 package com.ms.productservice.service;
 
-import com.ms.productservice.client.UserClient;
+import com.ms.productservice.client.OrderClient;
 import com.ms.productservice.dto.ProductCreateRequest;
 import com.ms.productservice.dto.ProductUpdateRequest;
 import com.ms.productservice.dto.ProductResponse;
@@ -17,14 +17,12 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-    private final UserClient userClient;
+    private final OrderClient orderClient;
 
-    public ProductService(ProductRepository productRepository,
-                          ProductMapper productMapper,
-                          UserClient userClient) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, OrderClient orderClient) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
-        this.userClient = userClient;
+        this.orderClient = orderClient;
     }
 
     public ProductResponse create(ProductCreateRequest request) {
@@ -67,13 +65,23 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Object getProductWithUser(Long productId, Long userId) {
+    public Object getProductWithOrders(Long productId) {
         ProductResponse product = getById(productId);
-        Object user = userClient.getUserById(userId).getData();
+        Object orders = orderClient.getOrdersByProductId(productId).getData();
 
         java.util.Map<String, Object> result = new java.util.HashMap<>();
         result.put("product", product);
-        result.put("user", user);
+        result.put("orders", orders);
         return result;
     }
+
+//    public Object getProductWithUser(Long productId, Long userId) {
+//        ProductResponse product = getById(productId);
+//        Object user = userClient.getUserById(userId).getData();
+//
+//        java.util.Map<String, Object> result = new java.util.HashMap<>();
+//        result.put("product", product);
+//        result.put("user", user);
+//        return result;
+//    }
 }

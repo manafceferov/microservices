@@ -46,9 +46,8 @@ public class ProductController {
         return new ApiResponse<>(true, Messages.DELETED.name());
     }
 
-    @GetMapping("/{productId}/user/{userId}")
-    public ApiResponse<Object> getProductWithUser(@PathVariable Long productId,
-                                                  @PathVariable Long userId) {
-        return new ApiResponse<>(true, productService.getProductWithUser(productId, userId), Messages.SUCCESS.name());
+    @GetMapping("/{id}/orders")
+    public ApiResponse<Object> getProductWithOrders(@PathVariable Long id) {
+        return new ApiResponse<>(true, productService.getProductWithOrders(id), Messages.SUCCESS.name());
     }
 }

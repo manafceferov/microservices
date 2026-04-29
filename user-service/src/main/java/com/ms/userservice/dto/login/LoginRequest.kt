@@ -1,4 +1,4 @@
-package com.ms.userservice.dto
+package com.ms.userservice.dto.login
 
 import jakarta.validation.constraints.NotBlank
 

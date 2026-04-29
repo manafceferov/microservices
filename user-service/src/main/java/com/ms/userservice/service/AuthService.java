@@ -1,9 +1,9 @@
 package com.ms.userservice.service;
 
-import com.ms.userservice.dto.LoginRequest;
-import com.ms.userservice.dto.LoginResponse;
-import com.ms.userservice.dto.UserCreateRequest;
-import com.ms.userservice.dto.UserResponse;
+import com.ms.userservice.dto.login.LoginRequest;
+import com.ms.userservice.dto.login.LoginResponse;
+import com.ms.userservice.dto.user.UserCreateRequest;
+import com.ms.userservice.dto.user.UserResponse;
 import com.ms.userservice.entity.User;
 import com.ms.userservice.mapper.UserMapper;
 import com.ms.userservice.repository.UserRepository;
@@ -53,6 +53,7 @@ public class AuthService {
         LoginResponse response = new LoginResponse();
         response.setToken(token);
         response.setUsername(user.getUsername());
+        response.setUserId(user.getId());
         return response;
     }
 }

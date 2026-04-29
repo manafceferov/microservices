@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Profil')}"></head>
+<body>
+<th:block th:replace="~{fragments/nav :: navbar}"></th:block>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Profil Məlumatları</h2>
+
+    <div th:if="${success}" class="alert alert-success text-center" th:text="${success}" id="successMessage"></div>
+    <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}" id="errorMessage"></div>
+
+    <form class="needs-validation" th:action="@{/profile/update}" th:object="${userUpdateRequest}"
+          method="post" enctype="multipart/form-data" novalidate>
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="mb-4">
+            <div class="text-start">
+                <div style="width:120px;height:120px;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;">
+                    <img th:if="${avatarUrl != null}"
+                         th:src="${avatarUrl}"
+                         alt="Profil şəkli"
+                         style="width:100%;height:100%;object-fit:cover;"/>
+                    <i th:if="${avatarUrl == null}" class="fas fa-user fa-3x text-muted"></i>
+                </div>
+                <div class="mt-2">
+                    <label class="form-label">Profil şəkli</label>
+                    <input type="file" class="form-control form-control-sm" name="file" accept="image/*"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Ad</label>
+                <input type="text" class="form-control" th:field="*{firstName}"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Soyad</label>
+                <input type="text" class="form-control" th:field="*{lastName}"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" th:field="*{username}"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" th:field="*{email}" readonly/>
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Telefon nömrəsi</label>
+                <input type="text" class="form-control" th:field="*{phoneNumber}"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Doğum tarixi</label>
+                <input type="date" class="form-control" th:field="*{birthDate}"/>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Cins</label>
+            <select class="form-select" th:field="*{gender}">
+                <option value="">Seçin</option>
+                <option value="MALE">Kişi</option>
+                <option value="FEMALE">Qadın</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Yeni şifrə</label>
+                <div class="position-relative">
+                    <input type="password" class="form-control pe-5" id="password"
+                           th:field="*{password}" placeholder="Dəyişmək istəmirsənsə boş burax"
+                           autocomplete="new-password"/>
+                    <button type="button"
+                            class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3"
+                            onclick="togglePassword('password', this)"
+                            style="border:none;background:none;cursor:pointer;z-index:10;">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-success me-2">
+                <i class="fas fa-save me-1"></i>Yadda saxla
+            </button>
+            <a href="/home" class="btn btn-secondary me-2">
+                <i class="fas fa-home me-1"></i>Ana səhifə
+            </a>
+            <a href="/logout" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt me-1"></i>Çıxış
+            </a>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function togglePassword(inputId, button) {
+        const input = document.getElementById(inputId);
+        const icon = button.querySelector('i');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    (function () {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+
+    setTimeout(function () {
+        const success = document.getElementById('successMessage');
+        const error = document.getElementById('errorMessage');
+        [success, error].forEach(el => {
+            if (el) {
+                el.style.transition = 'opacity 0.5s';
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 500);
+            }
+        });
+    }, 3000);
+</script>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

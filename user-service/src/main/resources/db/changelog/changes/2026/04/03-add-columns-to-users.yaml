@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03
+      author: ms
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: first_name
+                  type: VARCHAR(100)
+              - column:
+                  name: last_name
+                  type: VARCHAR(100)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(20)
+              - column:
+                  name: birth_date
+                  type: VARCHAR(20)
+              - column:
+                  name: gender
+                  type: VARCHAR(10)
+              - column:
+                  name: status
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

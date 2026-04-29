@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Login')}"></head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">
+                        <i class="fas fa-sign-in-alt me-2"></i>Daxil ol
+                    </h3>
+
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+                    <form th:action="@{/login}" th:object="${loginRequest}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" th:field="*{username}" placeholder="Username daxil edin"/>
+                            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Şifrə daxil edin"/>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePass()">
+                                    <i class="fas fa-eye" id="passIcon"></i>
+                                </button>
+                            </div>
+                            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-1"></i>Daxil ol
+                        </button>
+                        <div class="text-center">
+                            <a th:href="@{/register}">Hesabınız yoxdur? Qeydiyyat</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function togglePass() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('passIcon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+</script>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

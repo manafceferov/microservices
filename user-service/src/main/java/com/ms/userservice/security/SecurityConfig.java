@@ -26,7 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                )
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((request, response, authException) -> {
                             response.setStatus(401);
@@ -36,8 +38,11 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/login", "/register", "/logout").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/uploads/**").permitAll()
+                        .requestMatchers("/home/**", "/profile/**", "/orders/**", "/cart/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

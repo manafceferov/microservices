@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer" class="mt-5 py-3 text-center">
+    <p class="text-muted">© 2026 Microservices. Bütün hüquqlar qorunur.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const btn = document.getElementById('darkModeBtn');
+    const icon = document.getElementById('darkModeIcon');
+
+    function applyDarkMode(enabled) {
+        if (enabled) {
+            document.documentElement.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+            if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
+            if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+        }
+    }
+
+    applyDarkMode(localStorage.getItem('darkMode') === 'true');
+
+    if (btn) {
+        btn.addEventListener('click', function() {
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', !isDark);
+            applyDarkMode(!isDark);
+        });
+    }
+</script>
+</body>
+</html>

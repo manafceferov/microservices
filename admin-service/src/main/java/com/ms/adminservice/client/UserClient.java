@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "user-service", url = "http://localhost:1111", configuration = FeignConfig.class)
 public interface UserClient {
 
-    @GetMapping("/api/users")
+    @GetMapping("/api/admin/users")
     ApiResponse<Object> getAllUsers();
 
     @GetMapping("/api/users/{id}")
     ApiResponse<Object> getUserById(@PathVariable Long id);
 
-    @DeleteMapping("/api/users/{id}")
+    @DeleteMapping("/api/admin/users/{id}")
     ApiResponse<Void> deleteUser(@PathVariable Long id);
 
-    @PutMapping("/api/users/{id}/role")
+    @PutMapping("/api/admin/users/{id}/role")
     ApiResponse<Object> changeRole(@PathVariable Long id, @RequestParam String role);
 }

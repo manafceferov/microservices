@@ -1,0 +1,71 @@
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+html.dark-mode body,
+body.dark-mode {
+    background-color: #1a1a2e !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .navbar,
+body.dark-mode .navbar {
+    background-color: #16213e !important;
+}
+
+html.dark-mode .card,
+body.dark-mode .card {
+    background-color: #16213e !important;
+    border-color: #0f3460 !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .table,
+body.dark-mode .table {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .table-striped > tbody > tr:nth-of-type(odd),
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #0f3460 !important;
+}
+
+html.dark-mode .form-control,
+body.dark-mode .form-control {
+    background-color: #16213e !important;
+    border-color: #0f3460 !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .form-control:focus,
+body.dark-mode .form-control:focus {
+    background-color: #16213e !important;
+    color: #e0e0e0 !important;
+    border-color: #0f3460 !important;
+    box-shadow: none !important;
+}
+
+html.dark-mode .form-select,
+body.dark-mode .form-select {
+    background-color: #16213e !important;
+    border-color: #0f3460 !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .modal-content,
+body.dark-mode .modal-content {
+    background-color: #16213e !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .modal-header,
+html.dark-mode .modal-footer,
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: #0f3460 !important;
+}
+
+html.dark-mode .text-muted,
+body.dark-mode .text-muted {
+    color: #9e9e9e !important;
+}

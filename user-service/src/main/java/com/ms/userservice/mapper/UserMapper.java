@@ -1,8 +1,8 @@
 package com.ms.userservice.mapper;
 
-import com.ms.userservice.dto.UserCreateRequest;
-import com.ms.userservice.dto.UserUpdateRequest;
-import com.ms.userservice.dto.UserResponse;
+import com.ms.userservice.dto.user.UserCreateRequest;
+import com.ms.userservice.dto.user.UserUpdateRequest;
+import com.ms.userservice.dto.user.UserResponse;
 import com.ms.userservice.entity.User;
 import org.mapstruct.Mapper;
 

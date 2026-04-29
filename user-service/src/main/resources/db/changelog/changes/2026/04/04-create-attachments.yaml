@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04
+      author: ms
+      changes:
+        - createTable:
+            tableName: attachments
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: VARCHAR(255)
+              - column:
+                  name: file_url
+                  type: VARCHAR(500)
+              - column:
+                  name: owner_id
+                  type: BIGINT
+              - column:
+                  name: owner_type
+                  type: VARCHAR(50)

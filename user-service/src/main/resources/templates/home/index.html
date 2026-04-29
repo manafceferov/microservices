@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Ana Səhifə')}"></head>
+<body>
+
+<th:block th:replace="~{fragments/nav :: navbar}"></th:block>
+
+<div class="container mt-4">
+    <h2 class="mb-4"><i class="fas fa-box me-2"></i>Məhsullar</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="product : ${products}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <p class="card-text text-muted" th:text="${product.description}"></p>
+                    <p class="fw-bold text-success" th:text="${product.price} + ' AZN'"></p>
+                    <p class="text-muted">
+                        <i class="fas fa-warehouse me-1"></i>
+                        Stok: <span th:text="${product.stock}"></span>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <form th:action="@{/orders/create}" method="post">
+                        <input type="hidden" name="productId" th:value="${product.id}"/>
+                        <input type="hidden" name="userId" th:value="${session.userId}"/>
+                        <div class="card-footer">
+                            <form th:action="@{/cart/add}" method="post">
+                                <input type="hidden" name="productId" th:value="${product.id}"/>
+                                <div class="input-group">
+                                    <input type="number" name="quantity" class="form-control" value="1" min="1" th:max="${product.stock}"/>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-cart-plus me-1"></i>Səbətə at
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

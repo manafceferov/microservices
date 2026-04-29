@@ -2,10 +2,10 @@ package com.ms.userservice.controller;
 
 import com.ms.userservice.config.ApiResponse;
 import com.ms.userservice.constant.Messages;
-import com.ms.userservice.dto.LoginRequest;
-import com.ms.userservice.dto.LoginResponse;
-import com.ms.userservice.dto.UserCreateRequest;
-import com.ms.userservice.dto.UserResponse;
+import com.ms.userservice.dto.login.LoginRequest;
+import com.ms.userservice.dto.login.LoginResponse;
+import com.ms.userservice.dto.user.UserCreateRequest;
+import com.ms.userservice.dto.user.UserResponse;
 import com.ms.userservice.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

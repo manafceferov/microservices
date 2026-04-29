@@ -1,15 +1,16 @@
 package com.ms.userservice.service;
 
 import com.ms.userservice.client.OrderClient;
-import com.ms.userservice.dto.UserCreateRequest;
-import com.ms.userservice.dto.UserUpdateRequest;
-import com.ms.userservice.dto.UserResponse;
+import com.ms.userservice.dto.user.UserCreateRequest;
+import com.ms.userservice.dto.user.UserUpdateRequest;
+import com.ms.userservice.dto.user.UserResponse;
 import com.ms.userservice.entity.User;
 import com.ms.userservice.mapper.UserMapper;
 import com.ms.userservice.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +58,11 @@ public class UserService {
         if (request.getUsername() != null) user.setUsername(request.getUsername());
         if (request.getEmail() != null) user.setEmail(request.getEmail());
         if (request.getPassword() != null) user.setPassword(request.getPassword());
+        if (request.getFirstName() != null) user.setFirstName(request.getFirstName());
+        if (request.getLastName() != null) user.setLastName(request.getLastName());
+        if (request.getPhoneNumber() != null) user.setPhoneNumber(request.getPhoneNumber());
+        if (request.getBirthDate() != null) user.setBirthDate(request.getBirthDate());
+        if (request.getGender() != null) user.setGender(request.getGender());
 
         return userMapper.toResponse(userRepository.save(user));
     }
@@ -72,7 +78,7 @@ public class UserService {
         UserResponse user = getById(userId);
         Object orders = orderClient.getOrdersByUserId(userId).getData();
 
-        java.util.Map<String, Object> result = new java.util.HashMap<>();
+        Map<String, Object> result = new java.util.HashMap<>();
         result.put("user", user);
         result.put("orders", orders);
         return result;

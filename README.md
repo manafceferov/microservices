@@ -17,7 +17,7 @@ Servisər
 
 Admin tərəfi: Bütün istifadəçiləri, məhsulları və sifarişləri idarə etmə, sifariş statusunu dəyişdirmə, rol təyini.
 
-Servislərarası Kommunikasiya: OpenFeign vasitəsilə servislərarası HTTP sorğular.
+Servislərarası Kommunikasiya: FeignClient vasitəsilə servislərarası HTTP sorğular.
 
 Database Versioning: Hər servisin verilənlər bazası sxeminin idarə olunması üçün Liquibase istifadə edilib.
 
